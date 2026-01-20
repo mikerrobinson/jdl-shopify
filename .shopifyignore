@@ -1,0 +1,14 @@
+# Node modules
+node_modules/
+
+# Source files
+src/
+
+# Build configuration
+package.json
+package-lock.json
+tailwind.config.js
+
+# Development files
+*.log
+.DS_Store

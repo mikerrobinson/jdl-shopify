@@ -1,0 +1,13 @@
+{
+  "name": "jdl-shopify-theme",
+  "version": "1.0.0",
+  "description": "Shopify theme with Tailwind CSS",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/styles.css -o ./assets/app.css --minify",
+    "watch:css": "tailwindcss -i ./src/styles.css -o ./assets/app.css --watch",
+    "dev": "npm run watch:css"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}
