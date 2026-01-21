@@ -3,7 +3,6 @@
 
 # Config files that may contain sensitive data
 config.yml
-config/settings_data.json
 
 # Environment variables
 .env
