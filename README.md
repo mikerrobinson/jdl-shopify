@@ -4,7 +4,18 @@ A custom Shopify theme for [jdlindustries.com](https://jdlindustries.com) based 
 
 ## About This Theme
 
-This theme builds upon Shopify's Horizon theme foundation, which provides a clean, modern design with excellent performance characteristics. The addition of Tailwind CSS enables rapid prototyping and custom styling without the need to write custom CSS from scratch.
+This theme builds upon Shopify's Horizon theme foundation, which provides a clean, modern design with excellent performance characteristics. We've added Tailwind CSS to enable rapid prototyping and custom styling for new sections and layouts.
+
+### Dual System Approach
+
+This theme uses **both Horizon CSS and Tailwind CSS** together:
+
+- **Horizon CSS** (`assets/base.css`) - Use for existing components like buttons, cards, forms, navigation, carousels, and galleries
+- **Tailwind CSS** (`assets/app.css`) - Use for custom layouts, spacing utilities, and new sections you build from scratch
+
+**Key Feature**: Both systems respect Shopify admin theme settings - colors, fonts, and spacing defined in the admin automatically work with both Horizon classes and Tailwind utilities.
+
+📖 **See [STYLING_GUIDE.md](STYLING_GUIDE.md) for complete documentation on when to use each system.**
 
 ## Development Setup
 
@@ -49,18 +60,44 @@ This starts the local development server and syncs your theme with Shopify.
 - `npm run watch:css` - Watch for changes and rebuild automatically
 - `npm run dev` - Alias for watch:css
 
-## Using Tailwind CSS
+## Using the Dual System
 
-Add Tailwind utility classes directly to your Liquid templates:
+### Quick Examples
+
+**Use Tailwind for layout, Horizon for components:**
 
 ```liquid
-<div class="container mx-auto px-4">
-  <h1 class="text-3xl font-bold text-gray-900">Hello World</h1>
-  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-    Click Me
+<!-- Custom section with Tailwind layout -->
+<div class="flex flex-col md:flex-row gap-theme-lg p-theme-xl">
+  <div class="w-full md:w-1/2">
+    <h2 class="font-theme-heading text-theme-heading">{{ section.settings.title }}</h2>
+    <p class="font-theme-body text-theme-fg mt-theme-sm">{{ section.settings.text }}</p>
+
+    <!-- Use existing Horizon button component -->
+    {% render 'button', style: 'primary', text: 'Shop Now' %}
+  </div>
+  <div class="w-full md:w-1/2">
+    <img src="{{ section.settings.image | img_url: '800x' }}" class="w-full h-auto rounded-lg">
+  </div>
+</div>
+```
+
+**Theme-aware utilities automatically use admin settings:**
+
+```liquid
+<div class="bg-theme-bg text-theme-fg p-theme-md border border-theme-border">
+  <h3 class="font-theme-heading text-theme-heading">Styled with admin colors</h3>
+  <button class="bg-theme-primary hover:bg-theme-primary-hover text-white px-6 py-3 rounded">
+    Primary Color Button
   </button>
 </div>
 ```
+
+### Available Theme Utilities
+
+- **Colors**: `bg-theme-bg`, `text-theme-fg`, `text-theme-heading`, `bg-theme-primary`, `border-theme-border`
+- **Typography**: `font-theme-body`, `font-theme-heading`, `font-theme-subheading`, `font-theme-accent`
+- **Spacing**: `p-theme-sm`, `m-theme-md`, `gap-theme-lg` (3xs, 2xs, xs, sm, md, lg, xl, 2xl, 3xl)
 
 The build process automatically scans your templates and only includes the CSS classes you actually use, keeping the file size small.
 
