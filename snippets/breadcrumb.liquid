@@ -1,0 +1,110 @@
+{%- doc -%}
+  Breadcrumb navigation for product and collection pages.
+  Uses the 'parent_collection' metafield (collection reference) to build hierarchy.
+  If no parent_collection is set, defaults to "Products" (/collections/all).
+
+  @param {object} [product] - The product object (for product pages)
+  @param {object} [collection] - The collection object (for collection pages)
+
+  @example
+  {% render 'breadcrumb', product: product %}
+  {% render 'breadcrumb', collection: collection %}
+{%- enddoc -%}
+
+{%- liquid
+  # Build breadcrumb based on page type
+  if product != blank
+    # Product page: show product name as final item (non-linked)
+    assign current_title = product.title
+    assign current_url = product.url
+    assign is_current_linked = false
+
+    # Get parent collection from product metafield
+    assign parent = product.metafields.custom.parent_collection.value
+
+  elsif collection != blank
+    # Collection page: show collection name as final item (non-linked)
+    assign current_title = collection.title
+    assign current_url = collection.url
+    assign is_current_linked = false
+
+    # Get parent collection from collection metafield
+    assign parent = collection.metafields.custom.parent_collection.value
+  endif
+
+  # Build ancestor chain by following parent_collection references
+  # We'll build this in reverse (from current to root) then reverse it
+  assign ancestors = ''
+  assign max_depth = 10
+
+  # Walk up the parent chain
+  assign current_parent = parent
+-%}
+
+{%- for i in (1..max_depth) -%}
+  {%- if current_parent != blank -%}
+    {%- capture ancestor_item -%}{{ current_parent.title }}|{{ current_parent.url }}{%- endcapture -%}
+    {%- if ancestors == blank -%}
+      {%- assign ancestors = ancestor_item -%}
+    {%- else -%}
+      {%- assign ancestors = ancestors | append: ',' | append: ancestor_item -%}
+    {%- endif -%}
+    {%- assign current_parent = current_parent.metafields.custom.parent_collection.value -%}
+  {%- else -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- assign ancestors_reversed = ancestors | split: ',' | reverse -%}
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol class="tw-flex tw-flex-wrap tw-items-center tw-gap-1 tw-list-none tw-m-0 tw-p-0" style="font-family: var(--font-body--family); font-size: 0.875rem;">
+    {%- comment -%} Root: Products {%- endcomment -%}
+    <li class="breadcrumb__item tw-flex tw-items-center">
+      <a
+        href="{{ routes.all_products_collection_url }}"
+        class="breadcrumb__link"
+        style="color: var(--color-foreground); text-decoration: none;"
+      >
+        Products
+      </a>
+      <span class="breadcrumb__separator tw-mx-2" style="color: var(--color-foreground); opacity: 0.5;" aria-hidden="true">›</span>
+    </li>
+
+    {%- comment -%} Ancestor collections {%- endcomment -%}
+    {%- for ancestor in ancestors_reversed -%}
+      {%- assign parts = ancestor | split: '|' -%}
+      {%- assign ancestor_title = parts[0] -%}
+      {%- assign ancestor_url = parts[1] -%}
+      <li class="breadcrumb__item tw-flex tw-items-center">
+        <a
+          href="{{ ancestor_url }}"
+          class="breadcrumb__link"
+          style="color: var(--color-foreground); text-decoration: none;"
+        >
+          {{ ancestor_title }}
+        </a>
+        <span class="breadcrumb__separator tw-mx-2" style="color: var(--color-foreground); opacity: 0.5;" aria-hidden="true">›</span>
+      </li>
+    {%- endfor -%}
+
+    {%- comment -%} Current page (not linked) {%- endcomment -%}
+    {%- if current_title != blank -%}
+      <li class="breadcrumb__item" aria-current="page">
+        <span
+          class="breadcrumb__current"
+          style="color: var(--color-foreground); opacity: 0.7;"
+        >
+          {{ current_title }}
+        </span>
+      </li>
+    {%- endif -%}
+  </ol>
+</nav>
+
+{% stylesheet %}
+  .breadcrumb__link:hover {
+    color: var(--color-primary-hover) !important;
+    text-decoration: underline !important;
+  }
+{% endstylesheet %}
