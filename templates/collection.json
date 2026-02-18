@@ -9,6 +9,16 @@
  */
 {
   "sections": {
+    "breadcrumb_dE6JWU": {
+      "type": "breadcrumb",
+      "name": "Breadcrumb",
+      "settings": {
+        "section_width": "page-width",
+        "color_scheme": "",
+        "padding-block-start": 16,
+        "padding-block-end": 16
+      }
+    },
     "section": {
       "type": "section",
       "blocks": {
@@ -20,12 +30,12 @@
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-primary--family)",
-            "font_size": "",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
             "line_height": "normal",
             "letter_spacing": "normal",
-            "case": "none",
+            "case": "uppercase",
             "wrap": "pretty",
             "color": "",
             "background": false,
@@ -230,6 +240,7 @@
     }
   },
   "order": [
+    "breadcrumb_dE6JWU",
     "section",
     "main"
   ]

@@ -9,6 +9,16 @@
  */
 {
   "sections": {
+    "breadcrumb_DbDxFi": {
+      "type": "breadcrumb",
+      "name": "Breadcrumb",
+      "settings": {
+        "section_width": "page-width",
+        "color_scheme": "",
+        "padding-block-start": 16,
+        "padding-block-end": 16
+      }
+    },
     "section": {
       "type": "section",
       "blocks": {
@@ -35,6 +45,18 @@
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "divider_zcE7qU": {
+          "type": "_divider",
+          "name": "t:names.divider",
+          "settings": {
+            "thickness": 1,
+            "corner_radius": "square",
+            "width_percent": 100,
+            "padding-block-start": 0,
+            "padding-block-end": 0
           },
           "blocks": {}
         },
@@ -67,6 +89,7 @@
       },
       "block_order": [
         "text_tqQTNE",
+        "divider_zcE7qU",
         "text_twGGkJ"
       ],
       "name": "Collection heading",
@@ -432,6 +455,7 @@
     }
   },
   "order": [
+    "breadcrumb_DbDxFi",
     "section",
     "main",
     "section_tPD4Eg"
