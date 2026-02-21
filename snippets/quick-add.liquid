@@ -63,6 +63,46 @@
         name="quantity"
         value="{% if variant.quantity_rule.min %}{{ variant.quantity_rule.min }}{% else %}1{% endif %}"
       >
+      {%- if product.metafields.custom.is_hazmat.value -%}
+        <input
+          type="hidden"
+          name="properties[is_hazmat]"
+          value="true"
+        >
+      {%- endif -%}
+      {%- if variant.metafields.custom.length.value -%}
+        <input
+          type="hidden"
+          name="properties[length]"
+          value="{{ variant.metafields.custom.length.value.value }} {{ variant.metafields.custom.length.value.unit }}"
+        >
+      {%- endif -%}
+      {%- if variant.metafields.custom.width.value -%}
+        <input
+          type="hidden"
+          name="properties[width]"
+          value="{{ variant.metafields.custom.width.value.value }} {{ variant.metafields.custom.width.value.unit }}"
+        >
+      {%- endif -%}
+      {%- if variant.metafields.custom.height.value -%}
+        <input
+          type="hidden"
+          name="properties[height]"
+          value="{{ variant.metafields.custom.height.value.value }} {{ variant.metafields.custom.height.value.unit }}"
+        >
+      {%- endif -%}
+      <input
+        type="hidden"
+        name="properties[in_stock]"
+        value="{{ variant.available }}"
+      >
+      {%- if product.metafields.custom.lead_time.value -%}
+        <input
+          type="hidden"
+          name="properties[lead_time]"
+          value="{{ product.metafields.custom.lead_time.value }}"
+        >
+      {%- endif -%}
       {% comment %}
         Both Add and Choose buttons are rendered in the DOM, but only one is shown based on the data-quick-add-button attribute.
 

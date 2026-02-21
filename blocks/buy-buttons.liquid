@@ -63,6 +63,46 @@
           ref="variantId"
           value="{{ product.selected_or_first_available_variant.id }}"
         >
+        {%- if product.metafields.custom.is_hazmat.value -%}
+          <input
+            type="hidden"
+            name="properties[is_hazmat]"
+            value="true"
+          >
+        {%- endif -%}
+        {%- if variant.metafields.custom.length.value -%}
+          <input
+            type="hidden"
+            name="properties[length]"
+            value="{{ variant.metafields.custom.length.value.value }} {{ variant.metafields.custom.length.value.unit }}"
+          >
+        {%- endif -%}
+        {%- if variant.metafields.custom.width.value -%}
+          <input
+            type="hidden"
+            name="properties[width]"
+            value="{{ variant.metafields.custom.width.value.value }} {{ variant.metafields.custom.width.value.unit }}"
+          >
+        {%- endif -%}
+        {%- if variant.metafields.custom.height.value -%}
+          <input
+            type="hidden"
+            name="properties[height]"
+            value="{{ variant.metafields.custom.height.value.value }} {{ variant.metafields.custom.height.value.unit }}"
+          >
+        {%- endif -%}
+        <input
+          type="hidden"
+          name="properties[in_stock]"
+          value="{{ variant.available }}"
+        >
+        {%- if product.metafields.custom.lead_time.value -%}
+          <input
+            type="hidden"
+            name="properties[lead_time]"
+            value="{{ product.metafields.custom.lead_time.value }}"
+          >
+        {%- endif -%}
         {%- if block_settings.gift_card_form and product.gift_card? -%}
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section, block: block -%}
         {%- endif -%}
