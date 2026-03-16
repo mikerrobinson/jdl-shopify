@@ -30,7 +30,7 @@
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
-            "type_preset": "custom",
+            "type_preset": "h3",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
             "line_height": "normal",
@@ -52,9 +52,9 @@
           "type": "text",
           "name": "Description",
           "settings": {
-            "text": "{{ closest.collection.description }}",
+            "text": "<p>{{ closest.collection.description }}</p>",
             "width": "fit-content",
-            "max_width": "normal",
+            "max_width": "none",
             "alignment": "left",
             "type_preset": "rte",
             "font": "var(--font-primary--family)",
@@ -104,8 +104,8 @@
         "overlay_color": "#00000026",
         "overlay_style": "solid",
         "gradient_direction": "to top",
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding-block-start": 20,
+        "padding-block-end": 20
       }
     },
     "main": {
