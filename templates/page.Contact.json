@@ -23,8 +23,8 @@
       "type": "custom-contact-form",
       "name": "Custom Contact Form",
       "settings": {
-        "heading": "Contact Us",
-        "description": "<p>Need a custom quote, want some technical guidance, or have a general inquiry? We’d love to hear from you. Tell us what you need below, and we’ll be in touch soon.</p>",
+        "heading": "{{ page.title }}",
+        "description": "{{ page.content }}",
         "name_label": "Name",
         "phone_label": "Phone",
         "email_label": "Email",

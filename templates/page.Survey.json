@@ -1,0 +1,55 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "e539ffd0-018a-4fc1-9187-1f5ad0167c4e": {
+      "type": "main-page",
+      "settings": {
+        "content_direction": "column",
+        "gap": 12,
+        "color_scheme": "",
+        "padding-block-start": 40,
+        "padding-block-end": 0
+      }
+    },
+    "customer_feedback_survey_PmCRa9": {
+      "type": "customer-feedback-survey",
+      "name": "Customer Feedback Survey",
+      "settings": {
+        "heading": "{{ page.title }}",
+        "description": "{{ page.content }}",
+        "submit_label": "Submit Survey",
+        "success_heading": "Thank you!",
+        "success_message": "Your feedback has been submitted. We appreciate your time.",
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "flex-start",
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "flex-start",
+        "gap": 32,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "padding-block-start": 40,
+        "padding-block-end": 40
+      }
+    }
+  },
+  "order": [
+    "e539ffd0-018a-4fc1-9187-1f5ad0167c4e",
+    "customer_feedback_survey_PmCRa9"
+  ]
+}
